@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
-import re
 import sys
+
+import loginlogout
 
 try:
     from setuptools import setup
@@ -10,16 +11,8 @@ except ImportError:
     from distutils.core import setup
 
 
-def get_version(*file_paths):
-    filename = os.path.join(os.path.dirname(__file__), *parts)
-    version_file = open(filename).read()
-    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
-                              version_file, re.M)
-    if version_match:
-        return version_match.group(1)
-    raise RuntimeError('Unable to find version string.')
+version = loginlogout.__version__
 
-version = get_version('loginlogout', '__init__.py')
 
 if sys.argv[-1] == 'publish':
     try:

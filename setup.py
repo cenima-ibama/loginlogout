@@ -31,13 +31,12 @@ if sys.argv[-1] == 'tag':
     sys.exit()
 
 readme = open('README.rst').read()
-history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
     name='loginlogout',
     version=version,
     description="""View and templates to login and logout""",
-    long_description=readme + '\n\n' + history,
+    long_description=readme,
     author='Wille Marcel',
     author_email='wille@wille.blog.br',
     url='https://github.com/willemarcel/loginlogout',

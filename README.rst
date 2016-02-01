@@ -9,7 +9,7 @@ Quickstart
 
 Install loginlogout::
 
-    pip install git+
+    pip install git+https://github.com/ibamacsr/loginlogout.git
 
 Add to your settings the namespace and name of the url to where you want the users be redirect after the login:
 

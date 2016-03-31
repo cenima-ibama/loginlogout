@@ -5,12 +5,18 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.conf import settings
 
+from loginlogout.utils import * # import re
+
 
 def login_view(request):
     context = RequestContext(request)
     if request.POST:
         username = request.POST['username']
         password = request.POST['password']
+
+        if username.find("@funai.gov.br"):
+            username = validate_user_funai(username, "@funai.local")
+
         user = authenticate(username=username, password=password)
 
         if user is not None:

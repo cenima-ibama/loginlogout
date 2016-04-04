@@ -14,7 +14,7 @@ def login_view(request):
         username = request.POST['username']
         password = request.POST['password']
 
-        if username.find("@funai.gov.br"):
+        if username.find("@funai.gov.br") > 0:
             username = validate_user_funai(username, "@funai.local")
 
         user = authenticate(username=username, password=password)

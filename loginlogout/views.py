@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import redirect, render_to_response
+from django.shortcuts import redirect, render
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext, ugettext_lazy as _
@@ -9,7 +9,6 @@ from loginlogout.utils import * # import re
 
 
 def login_view(request):
-    context = RequestContext(request)
     if request.POST:
         username = request.POST['username']
         password = request.POST['password']
@@ -25,22 +24,16 @@ def login_view(request):
                 return redirect(reverse(settings.URL_AFTER_LOGIN))
             else:
                 msg = _('Your account is not active, Please contact the system administrator')
-                return render_to_response(
-                    'loginlogout/login_user.html',
-                    {'msg': msg}, context_instance=context
-                )
+                return redirect(reverse(settings.URL_AFTER_LOGIN))
+                #return render(request,  reverse(settings.URL_AFTER_LOGIN), {'msg': msg})
         else:
+            print('deu erro render')
             msg = _('Invalid username or password')
-            return render_to_response(
-                'loginlogout/login_page.html',
-                {'msg': msg}, context_instance=context
-            )
+            return redirect(reverse(settings.URL_AFTER_LOGIN))
+            #return render(request, reverse(settings.URL_AFTER_LOGIN), context={'msg': msg})
     else:
-        return render_to_response(
-            'loginlogout/login_page.html',
-            context_instance=context
-        )
-
+	#return render(request, reverse(settings.URL_AFTER_LOGIN))
+        return redirect(reverse(settings.URL_AFTER_LOGIN))
 
 def logout_view(request):
     if request.user.is_authenticated():
